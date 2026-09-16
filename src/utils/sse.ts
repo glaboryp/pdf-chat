@@ -1,19 +1,19 @@
 export const responseSSE = (
   { request }: { request: Request },
-  callback: (sendEvent: (data: any) => void) => Promise<void>
+  callback: (sendEvent: (data: unknown) => void) => Promise<void>
 ) => {
   const body = new ReadableStream({
     async start(controller) {
       // Text encoder for converting strings to Uint8Array
       const encoder = new TextEncoder();
-  
+
       // Send event to client
-      const sendEvent = (data: any) => {
+      const sendEvent = (data: unknown) => {
         const message = `data: ${JSON.stringify(data)}\n\n`;
         controller.enqueue(encoder.encode(message));
       };
 
-      callback(sendEvent)
+      await callback(sendEvent)
   
       // Handle the connection closing
       request.signal.addEventListener('abort', () => {

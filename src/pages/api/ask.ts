@@ -1,4 +1,4 @@
-import { type APIRoute } from "astro"
+import type { APIRoute } from "astro"
 import { readFile } from 'node:fs/promises'
 import { responseSSE } from '../../utils/sse'
 
