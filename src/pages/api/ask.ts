@@ -38,7 +38,7 @@ export const GET: APIRoute = async ({ request }) => {
     const response = await openai.chat.completions.create({
       model: 'gpt-3.5-turbo',
       stream: true,
-      max_tokens: 10,
+      max_tokens: 400,
       messages: [
         {
           role: 'system',
