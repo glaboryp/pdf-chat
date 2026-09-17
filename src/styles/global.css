@@ -4,17 +4,38 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --color-primary-50: #FFF5F2;
-  --color-primary-100: #FFF1EE;
-  --color-primary-200: #FFE4DE;
-  --color-primary-300: #FFD5CC;
-  --color-primary-400: #FFBCAD;
-  --color-primary-500: #FE795D;
-  --color-primary-600: #EF562F;
-  --color-primary-700: #EB4F27;
-  --color-primary-800: #CC4522;
-  --color-primary-900: #A5371B;
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Fraunces", Georgia, serif;
+
+  --color-paper: #FAF7F1;
+  --color-paper-raised: #FFFFFF;
+  --color-ink: #211C16;
+  --color-ink-soft: #4B4238;
+  --color-ink-faint: #6B6155;
+  --color-ink-mute: #8A8072;
+  --color-line: #E7DECF;
+
+  --color-primary-50: #FBF1E7;
+  --color-primary-100: #F4E6D6;
+  --color-primary-200: #EACBAE;
+  --color-primary-300: #DCA97E;
+  --color-primary-400: #CE8556;
+  --color-primary-500: #BB5C31;
+  --color-primary-600: #A83E1B;
+  --color-primary-700: #8F341A;
+  --color-primary-800: #7A2C15;
+  --color-primary-900: #642410;
+
+  --color-teal-600: #2F6F63;
+
+  --color-danger-bg: #F7E3DE;
+  --color-danger: #B3261E;
 }
 
 /* Bare directory only: @source doesn't support brace-expansion globs like *.{js,svelte}, it silently matches nothing. */
 @source "../../node_modules/flowbite-svelte";
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+}

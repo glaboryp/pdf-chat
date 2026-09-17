@@ -11,11 +11,18 @@ export const appStatus = writable(APP_STATUS.INIT)
 export const appStatusInfo = writable({
   id: '',
   url: '',
-  pages: 0
+  pages: 0,
+  name: '',
+  size: 0
 })
 
-export const setAppStatusLoading = () => {
+export const setAppStatusInit = () => {
+  appStatus.set(APP_STATUS.INIT)
+}
+
+export const setAppStatusLoading = ({ name, size }: { name: string, size: number }) => {
   appStatus.set(APP_STATUS.LOADING)
+  appStatusInfo.update((info) => ({ ...info, name, size }))
 }
 
 export const setAppStatusError = () => {
@@ -23,8 +30,8 @@ export const setAppStatusError = () => {
 }
 
 export const setAppStatusChatMode = (
-  { id, url, pages } :
-  { id: string, url: string, pages: number }) => {
+  { id, url, pages, name, size } :
+  { id: string, url: string, pages: number, name: string, size: number }) => {
   appStatus.set(APP_STATUS.CHAT_MODE)
-  appStatusInfo.set({ id, url, pages })
+  appStatusInfo.set({ id, url, pages, name, size })
 }
