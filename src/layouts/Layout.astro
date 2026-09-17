@@ -15,6 +15,9 @@ const { title } = Astro.props;
 		<meta name="description" content="Sube tu pdf y pregunta lo que quieras acerca de la infomación de dicho documento" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>
@@ -23,11 +26,6 @@ const { title } = Astro.props;
 	</body>
 </html>
 <style is:global>
-	html {
-		font-family: system-ui, sans-serif;
-		background: #c3c6cc;
-		background-size: 224px;
-	}
 	code {
 		font-family:
 			Menlo,
