@@ -6,6 +6,13 @@ export const responseSSE = (
     async start(controller) {
       // Text encoder for converting strings to Uint8Array
       const encoder = new TextEncoder();
+      let closed = false;
+
+      const close = () => {
+        if (closed) return;
+        closed = true;
+        controller.close();
+      };
 
       // Send event to client
       const sendEvent = (data: unknown) => {
@@ -13,12 +20,19 @@ export const responseSSE = (
         controller.enqueue(encoder.encode(message));
       };
 
-      await callback(sendEvent)
-  
-      // Handle the connection closing
-      request.signal.addEventListener('abort', () => {
-        controller.close();
-      });
+      // Handle the connection closing, even while callback is still streaming
+      request.signal.addEventListener('abort', close);
+
+      try {
+        await callback(sendEvent)
+        close();
+      } catch (error) {
+        console.error('SSE stream failed:', error);
+        if (!closed) {
+          closed = true;
+          controller.error(error);
+        }
+      }
     }
   });
 
