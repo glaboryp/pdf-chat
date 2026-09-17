@@ -8,13 +8,20 @@
     git clone git@github.com:tu_username/pdf-chat.git
     ```
 
-3. Instala las dependencias y ejecuta la aplicación en local
+3. Usa la versión de Node indicada en `.nvmrc` (si usas [nvm](https://github.com/nvm-sh/nvm), ejecuta `nvm use`)
+
+4. Copia `.env.example` a `.env` y rellena tus propias credenciales de [Cloudinary](https://cloudinary.com/) y de la [API de OpenAI](https://platform.openai.com/):
     ```bash
-    pnpm install
-    pnpm dev run
+    cp .env.example .env
     ```
 
-4. Realiza los cambios y crea una pull request 🚀
+5. Instala las dependencias y ejecuta la aplicación en local
+    ```bash
+    pnpm install
+    pnpm run dev
+    ```
+
+6. Realiza los cambios y crea una pull request 🚀
 
 
 ## 🛠️ Stack
