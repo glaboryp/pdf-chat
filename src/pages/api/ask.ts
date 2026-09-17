@@ -8,6 +8,8 @@ const openai = new OpenAI({
   apiKey: import.meta.env.OPENAI_KEY
 })
 
+const ID_PATTERN = /^[a-zA-Z0-9_-]+$/
+
 export const GET: APIRoute = async ({ request }) => {
   const url = new URL(request.url)
   const id = url.searchParams.get('id')
@@ -17,11 +19,20 @@ export const GET: APIRoute = async ({ request }) => {
     return new Response('Missing id', { status: 400 })
   }
 
+  if (!ID_PATTERN.test(id)) {
+    return new Response('Invalid id', { status: 400 })
+  }
+
   if (!question) {
     return new Response('Missing question', { status: 400 })
   }
 
-  const txt = await readFile(`public/text/${id}.txt`, 'utf-8')
+  let txt: string
+  try {
+    txt = await readFile(`public/text/${id}.txt`, 'utf-8')
+  } catch {
+    return new Response('Document not found', { status: 404 })
+  }
 
   return responseSSE({ request }, async (sendEvent) => {
     const response = await openai.chat.completions.create({
