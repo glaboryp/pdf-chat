@@ -8,7 +8,7 @@ const openai = new OpenAI({
   apiKey: import.meta.env.OPENAI_KEY
 })
 
-const ID_PATTERN = /^[a-zA-Z0-9_-]+$/
+const ID_PATTERN = /^[a-zA-Z0-9_\-]+$/v
 
 export const GET: APIRoute = async ({ request }) => {
   const url = new URL(request.url)
@@ -27,7 +27,7 @@ export const GET: APIRoute = async ({ request }) => {
     return new Response('Missing question', { status: 400 })
   }
 
-  let txt: string
+  let txt = ''
   try {
     txt = await readFile(`public/text/${id}.txt`, 'utf-8')
   } catch {

@@ -27,7 +27,6 @@ export const responseSSE = (
         await callback(sendEvent)
         close();
       } catch (error) {
-        console.error('SSE stream failed:', error);
         if (!closed) {
           closed = true;
           controller.error(error);
