@@ -2,31 +2,35 @@
   "name": "chat-with-pdf",
   "type": "module",
   "version": "0.0.1",
+  "packageManager": "pnpm@12.4.2",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "test": "vitest run",
+    "lint": "eslint ."
   },
   "dependencies": {
     "@astrojs/check": "^0.9.10",
-    "@astrojs/node": "^11.1.5",
+    "@astrojs/node": "^11.1.6",
     "@astrojs/svelte": "^9.0.1",
     "@tailwindcss/vite": "^4.3.3",
-    "astro": "^7.3.2",
+    "astro": "^7.3.5",
     "cloudinary": "^2.11.0",
-    "openai": "^7.15.0",
-    "svelte": "^5.57.0",
+    "openai": "^7.23.0",
+    "svelte": "^5.57.1",
     "svelte-file-dropzone": "^2.0.9",
     "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
     "@types/node": "^24.9.2",
-    "eslint": "^10.10.0",
+    "eslint": "^10.11.0",
     "eslint-config-love": "^157.0.0",
     "flowbite": "^4.0.2",
     "flowbite-svelte": "^1.33.1",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "vitest": "^5.0.2"
   }
 }
