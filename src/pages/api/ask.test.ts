@@ -22,6 +22,7 @@ const get = async (query: string) => {
 beforeEach(() => {
   readFile.mockReset()
   create.mockReset()
+  vi.stubEnv('OPENAI_MODEL', 'test-model')
 })
 
 describe('GET /api/ask', () => {
@@ -58,5 +59,28 @@ describe('GET /api/ask', () => {
     expect(readFile).toHaveBeenCalledWith('public/text/doc.txt', 'utf-8')
     expect(response.headers.get('Content-Type')).toBe('text/event-stream')
     expect(await response.text()).toBe('data: "Hola"\n\ndata: "__END__"\n\n')
+  })
+
+  it('uses the model configured in OPENAI_MODEL', async () => {
+    readFile.mockResolvedValue('contenido')
+    create.mockResolvedValue([])
+
+    await (await get('id=doc&question=q')).text()
+
+    expect(create).toHaveBeenCalledWith(expect.objectContaining({
+      model: 'test-model',
+      max_completion_tokens: 400
+    }))
+  })
+
+  it('returns 500 when OPENAI_MODEL is not configured', async () => {
+    vi.stubEnv('OPENAI_MODEL', '')
+    readFile.mockResolvedValue('contenido')
+
+    const response = await get('id=doc&question=q')
+
+    expect(response.status).toBe(500)
+    expect(await response.text()).toBe('OPENAI_MODEL is not configured')
+    expect(create).not.toHaveBeenCalled()
   })
 })
