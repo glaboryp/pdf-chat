@@ -27,6 +27,10 @@ export const GET: APIRoute = async ({ request }) => {
     return new Response('Missing question', { status: 400 })
   }
 
+  if (!import.meta.env.OPENAI_MODEL) {
+    return new Response('OPENAI_MODEL is not configured', { status: 500 })
+  }
+
   let txt = ''
   try {
     txt = await readFile(`public/text/${id}.txt`, 'utf-8')
@@ -36,9 +40,9 @@ export const GET: APIRoute = async ({ request }) => {
 
   return responseSSE({ request }, async (sendEvent) => {
     const response = await openai.chat.completions.create({
-      model: 'gpt-3.5-turbo',
+      model: import.meta.env.OPENAI_MODEL,
       stream: true,
-      max_tokens: 400,
+      max_completion_tokens: 400,
       messages: [
         {
           role: 'system',

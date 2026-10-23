@@ -15,6 +15,8 @@
     cp .env.example .env
     ```
 
+    En `OPENAI_MODEL` indica el modelo de OpenAI que quieres usar (por ejemplo `gpt-5.4-mini`). Consulta los [modelos disponibles](https://platform.openai.com/docs/models) y sus [precios](https://openai.com/api/pricing/), y evita los que tengan fecha de retirada próxima: OpenAI retira los modelos antiguos y, cuando eso ocurre, las preguntas al PDF dejan de funcionar.
+
 5. Instala las dependencias y ejecuta la aplicación en local
     ```bash
     pnpm install
